@@ -91,10 +91,12 @@ cd iso
 
 Create a `.env` file in the `backend/` directory:
 ```env
+BACKEND_PORT=8000
+FRONTEND_URL=http://localhost:3000
+NODE_ENV=development
+
 # Database Credentials
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=password
-POSTGRES_DB=iso
+DATABASE_URL=postgres://postgres:password@localhost:5432/iso
 
 # Auth Configuration
 JWT_SECRET=your_super_secret_access_key
@@ -106,7 +108,7 @@ IMAGEKIT_PRIVATEKEY=your_private_key
 IMAGEKIT_URLENDPOINT=https://ik.imagekit.io/your_id
 ```
 
-*(Note: The `docker-compose.yml` automatically passes the correct `DATABASE_URL` and `REDIS_URL` to the containers).*
+*(Note: The `docker-compose.yml` automatically ignores the `DATABASE_URL` inside `.env` and overwrites it to connect to the Docker DB container).*
 
 ### 2. Start the Stack
 From the root directory, run:
